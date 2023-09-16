@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import classes from "./SigninForm.module.css";
 import TextField from "@material-ui/core/TextField";
-import { signIn } from "../../api/apiServices";
-import { redirect } from "react-router-dom";
+import { signInService } from "../../api/apiServices";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+
 // import { makeStyles } from "@mui/styles";
 
 // const useStyles = makeStyles((theme) => ({
@@ -19,12 +21,14 @@ import { redirect } from "react-router-dom";
 // }));
 
 const SigninForm = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const usernameRef = useRef();
   const passwordRef = useRef();
   const [validUsername, setValidUsername] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const enteredUsername = usernameRef.current.value;
     const enteredPassword = passwordRef.current.value;
@@ -38,8 +42,13 @@ const SigninForm = () => {
     }
     console.log(enteredUsername, enteredPassword);
     if (validUsername && validPassword) {
-      const res = signIn(enteredUsername, enteredPassword);
+      const res = await signInService(enteredUsername, enteredPassword);
       console.log("res", res);
+      if (res && res.token) {
+        console.log("res.token", res.token);
+        login(res.token);
+        navigate("/candidates");
+      }
     }
   };
   return (

@@ -1,0 +1,12 @@
+.candidate-list {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+  padding: 1.5rem;
+}

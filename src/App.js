@@ -1,16 +1,21 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Signin from "./pages/Signin";
-import Candidates from "./pages/Candidates";
+import SigninPage from "./pages/Signin";
+import CandidatesPage from "./pages/Candidates";
+import CandidatePage from "./pages/Candidate";
+import { Switch } from "@material-ui/core";
 
 function App() {
   return (
     <div className="App">
       <main>
         <Routes>
-          <Route path="/" element={<Signin />} />
-          <Route path="/candidates" element={<Candidates />} />
+          {/* <Switch> */}
+          <Route path="/" element={<SigninPage />} />
+          <Route path="/candidates" element={<CandidatesPage />} />
+          <Route path={"/candidate:id"} element={<CandidatePage />} />
+          {/* </Switch> */}
         </Routes>
       </main>
     </div>
