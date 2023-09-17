@@ -5,6 +5,7 @@ import CandidatesList from "../components/CandidatesPage/CandidatesList";
 
 const CandidatesPage = () => {
   const { token } = useAuth();
+
   return (
     <div>{token ? <CandidatesList token={token} /> : <Navigate to="/" />}</div>
   );

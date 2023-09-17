@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -23,9 +23,8 @@ const useStyles = makeStyles({
 });
 
 const CandidateItem = ({ candidate }) => {
-  console.log("candidate: ", candidate);
+  // console.log("candidate: ", candidate);
   const classes = useStyles();
-  // const navigate = useNavigate();
 
   return (
     <Card className={classes.root}>
@@ -45,11 +44,14 @@ const CandidateItem = ({ candidate }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {/* <Link to={`/candidate/${candidate.id}`}> */}
-        <Button size="small" color="primary" className={classes.root}>
-          Full Details
-        </Button>
-        {/* </Link> */}
+        <Link
+          to={`/candidate/${candidate.id}`}
+          state={{ candidateData: candidate }}
+        >
+          <Button size="small" color="primary" className={classes.root}>
+            Full Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
