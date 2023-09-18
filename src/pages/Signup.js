@@ -1,7 +1,6 @@
 import React from "react";
 import Typed from "react-typed";
 import classes from "./Signin.module.css";
-import SigninForm from "../components/Signin/SigninForm";
 import SignupForm from "../components/Singup/SignupForm";
 
 const Signup = () => {

@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import classes from "./Candidate.module.css";
 import CandidateImage from "../components/SingleCandidatePage/CandidateImage";
-import { Container } from "@material-ui/core";
 import CandidateInfo from "../components/SingleCandidatePage/CandidateInfo";
 
 const Candidate = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -8,15 +8,15 @@ const AuthProvider = ({ children }) => {
 
   const login = (newToken) => {
     setToken(newToken);
-    localStorage.setItem("token", newToken); // Store token in localStorage
+    console.log(token);
+    localStorage.setItem("token", newToken);
   };
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem("token"); // Remove token from localStorage
+    localStorage.removeItem("token");
   };
 
-  // console.log("token: " + token);
   return (
     <AuthContext.Provider value={{ logout, login, token }}>
       {children}

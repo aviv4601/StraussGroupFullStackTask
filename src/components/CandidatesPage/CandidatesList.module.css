@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.circular-progress {
+  color: white;
+}
+
 .candidate-list {
   margin-top: 2rem;
   display: flex;

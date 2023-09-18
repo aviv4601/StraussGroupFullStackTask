@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "../../context/authContext";
-import { Link, useLocation } from "react-router-dom";
 import UnauthenticatedHeader from "./isAuthenticated/UnauthenticatedHeader";
 import AuthenticatedHeader from "./isAuthenticated/AuthenticatedHeader";
 import classes from "./isAuthenticated/Header.module.css";

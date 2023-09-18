@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import classes from "./Input.module.css";
 
 const PasswordInput = ({ passwordRef }) => {

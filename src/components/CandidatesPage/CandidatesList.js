@@ -29,7 +29,7 @@ const CandidatesList = ({ token }) => {
     fetchCandidates();
   }, [token]);
 
-  // Filter candidates based on the search query
+  // filter candidates based on the search query
   const filteredCandidates = candidates.filter((candidate) => {
     const fullName =
       `${candidate.first_name} ${candidate.last_name}`.toLowerCase();
@@ -47,24 +47,28 @@ const CandidatesList = ({ token }) => {
   return (
     <>
       {isLoading ? (
-        <CircularProgress color="white" />
+        <CircularProgress className={classes["circular-progress"]} />
       ) : (
         <div className={classes["candidate-list-container"]}>
           <SearchBar onSearch={setSearchQuery} />
           <div className={classes["candidate-list"]}>
-            {candidatesToDisplay
-              .filter((candidate) => candidate.first_name !== null)
-              .map((candidate) => {
-                return (
-                  <div key={candidate.id}>
-                    <ul className={classes.list}>
-                      <li>
-                        <CandidateItem candidate={candidate} />
-                      </li>
-                    </ul>
-                  </div>
-                );
-              })}
+            {candidatesToDisplay.length === 0 ? (
+              <p>Candidate didn't found...</p>
+            ) : (
+              candidatesToDisplay
+                .filter((candidate) => candidate.first_name !== null)
+                .map((candidate) => {
+                  return (
+                    <div key={candidate.id}>
+                      <ul className={classes.list}>
+                        <li>
+                          <CandidateItem candidate={candidate} />
+                        </li>
+                      </ul>
+                    </div>
+                  );
+                })
+            )}
           </div>
           <div className={classes.pagination}>
             <Pagination
