@@ -19,7 +19,12 @@ const CandidateInfo = ({ candidateData }) => {
       <div className={classes["candidate-info-container"]}>
         <MailIcon />
         <h5 className={classes["candidate-info-text"]}>
-          {candidateData.email}
+          <a
+            href={`mailto:${candidateData.email}`}
+            className={classes["candidate-mail-link"]}
+          >
+            {candidateData.email}
+          </a>
         </h5>
       </div>
       <div className={classes["candidate-info-container"]}>

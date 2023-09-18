@@ -6,6 +6,7 @@ import PasswordInput from "../UI/Inputs/PasswordInput";
 import EmailInput from "../UI/Inputs/EmailInput";
 import { signUpService } from "../../api/apiServices";
 import classes from "./SignupForm.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignupForm = () => {
   const { login } = useAuth();
@@ -54,10 +55,14 @@ const SignupForm = () => {
       console.log("res", res);
       if (res && res.success === false) {
         setUsernameAlreadyExists(true);
+        toast.error("Unsuccessful sign up");
         return;
       }
+      toast.success("Signed up successfully");
       login(res.token);
-      navigate("/candidates");
+      setTimeout(() => {
+        navigate("/candidates"); // the timer is used here to slow down the main thread and let the toast message to be shown
+      }, 1500);
     }
   };
 
@@ -99,6 +104,7 @@ const SignupForm = () => {
         >
           Sign up
         </button>
+        <Toaster />
       </form>
     </div>
   );

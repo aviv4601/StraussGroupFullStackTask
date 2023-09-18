@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import UsernameInput from "../UI/Inputs/UsernameInput";
 import PasswordInput from "../UI/Inputs/PasswordInput";
+import toast, { Toaster } from "react-hot-toast";
 
 const SigninForm = () => {
   const { login } = useAuth();
@@ -34,15 +35,19 @@ const SigninForm = () => {
       console.log("res", res);
       if (res && res.success === false && res.msg === "Username not exists") {
         setIsExistUsername(false);
+        toast.error("Unsuccessful sign in");
         return;
       }
       if (res && res.success === false && res.msg === "Password not match") {
         setIsWrongPassword(true);
+        toast.error("Unsuccessful sign in");
         return;
       }
-
+      toast.success("Sign in successfully");
       login(res.token);
-      navigate("/candidates");
+      setTimeout(() => {
+        navigate("/candidates"); // the timer is used here to slow down the main thread and let the toast message to be shown
+      }, 1500);
     }
   };
   return (
@@ -65,6 +70,7 @@ const SigninForm = () => {
           >
             Sign in
           </button>
+          <Toaster />
         </form>
       </div>
     </div>
