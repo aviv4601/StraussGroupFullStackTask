@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
-// import { useAuth } from "../../context/authContext";
 import { getCandidatesService } from "../../api/apiServices";
 import CandidateItem from "./CandidateItem";
+import SearchBar from "./SearchAndFilter/SearchBar";
 import classes from "./CandidatesList.module.css";
+import Pagination from "@material-ui/lab/Pagination";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const CandidatesList = ({ token }) => {
-  //   const { token } = useAuth();
   const [candidates, setCandidates] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
   useEffect(() => {
+    setIsLoading(true);
     const fetchCandidates = async () => {
       try {
         const res = await getCandidatesService(token);
@@ -16,27 +23,61 @@ const CandidatesList = ({ token }) => {
       } catch (err) {
         console.log("error: ", err);
       }
+      setIsLoading(false);
     };
 
     fetchCandidates();
   }, [token]);
 
+  // Filter candidates based on the search query
+  const filteredCandidates = candidates.filter((candidate) => {
+    const fullName =
+      `${candidate.first_name} ${candidate.last_name}`.toLowerCase();
+    return fullName.includes(searchQuery.toLowerCase());
+  });
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const candidatesToDisplay = filteredCandidates.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className={classes["candidate-list"]}>
-      {candidates
-        .filter((candidate) => candidate.first_name !== null) // to avoid passing the 2 null objects the candidate array contains
-        .map((candidate) => {
-          return (
-            <div key={candidate.id}>
-              <ul className={classes.list}>
-                <li>
-                  <CandidateItem candidate={candidate} />
-                </li>
-              </ul>
-            </div>
-          );
-        })}
-    </div>
+    <>
+      {isLoading ? (
+        <CircularProgress color="white" />
+      ) : (
+        <div className={classes["candidate-list-container"]}>
+          <SearchBar onSearch={setSearchQuery} />
+          <div className={classes["candidate-list"]}>
+            {candidatesToDisplay
+              .filter((candidate) => candidate.first_name !== null)
+              .map((candidate) => {
+                return (
+                  <div key={candidate.id}>
+                    <ul className={classes.list}>
+                      <li>
+                        <CandidateItem candidate={candidate} />
+                      </li>
+                    </ul>
+                  </div>
+                );
+              })}
+          </div>
+          <div className={classes.pagination}>
+            <Pagination
+              count={Math.ceil(filteredCandidates.length / itemsPerPage)}
+              variant="outlined"
+              page={currentPage}
+              onChange={handlePageChange}
+              color="standard"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
