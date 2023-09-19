@@ -1,47 +1,23 @@
 var express = require("express");
-const jwt = require("jsonwebtoken");
-const JWT_SECRET = `${process.env.JWT_SECRET_KEY}`;
-const db = require("../db/database");
+var verifyToken = require("../middleware/getCandidates/verifyToken");
+var getCandidates = require("../middleware/getCandidates/getCandidates");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader.split(" ")[1]; // Remove "Bearer " prefix
-  console.log("the token is:", token);
+router.get("/", verifyToken, getCandidates, (req, res) => {
+  try {
+    const candidates = req.candidates || []; // ensure candidates is an array, default to an empty array
 
-  if (!token) {
-    return res.status(401).json({ success: false, msg: "Token not provided" });
-  }
-
-  const tokenData = jwt.decode(token);
-  console.log("Decoded Token:", tokenData);
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    console.log(token);
-    if (err) {
-      return res.status(403).json({ success: false, msg: "Invalid token" });
+    if (candidates.length > 0) {
+      // send a success response with the candidates
+      res.json({ success: true, candidates: candidates });
+    } else {
+      // send a failure response if no candidates are found
+      res.json({ success: false, msg: "No candidates found" });
     }
-
-    // SQLite query to retrieve candidates from the database
-    const query = "SELECT * FROM candidate";
-
-    db.all(query, (err, rows) => {
-      if (err) {
-        console.error("Error executing query: " + err);
-        res.status(500).json({ success: false, msg: "Internal Server Error" });
-        return;
-      }
-
-      // check if there are candidates in the result
-      if (rows.length > 0) {
-        // send a success response with the candidates
-        res.json({ success: true, candidates: rows });
-      } else {
-        // send a failure response if no candidates are found
-        res.json({ success: false, msg: "No candidates found" });
-      }
-    });
-  });
+  } catch (error) {
+    console.error("Error handling candidates request: " + error);
+    res.json({ success: false, msg: "Internal Server Error" });
+  }
 });
 
 module.exports = router;
