@@ -1,0 +1,41 @@
+.candidate-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.candidate-upper-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.candidate-job-description {
+  font-size: small;
+  margin-top: 2rem;
+  width: 50%;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .candidate-container {
+    margin-top: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .candidate-upper-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .candidate-job-description {
+    width: 90%;
+    text-align: left;
+  }
+}

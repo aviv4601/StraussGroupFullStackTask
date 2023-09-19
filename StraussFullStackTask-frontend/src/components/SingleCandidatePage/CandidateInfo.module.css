@@ -1,0 +1,25 @@
+.candidate-info {
+  margin-left: 2rem;
+}
+
+.candidate-info-text {
+  margin-left: 0.7rem;
+}
+
+.candidate-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 5vh;
+}
+
+.candidate-mail-link {
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .candidate-info {
+    margin-left: 0rem;
+  }
+}

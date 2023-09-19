@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+  align-items: center;
+}
+
+.form-btn {
+  padding: 1rem;
+  margin: 1rem;
+  width: 30%;
+  cursor: pointer;
+}
+
+.invalid-input {
+  color: red;
+  font-size: small;
+  margin: 0;
+}

@@ -1,0 +1,31 @@
+.header-container {
+  width: 100%;
+  top: 0;
+  position: absolute;
+  text-align: right;
+  right: 1rem;
+  justify-content: space-between;
+}
+
+.unordered-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-style {
+  list-style: none;
+}
+
+.anchor-style {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.icon-wrapper {
+  position: relative;
+  margin-right: 10px;
+  top: 3px;
+}

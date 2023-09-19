@@ -1,0 +1,30 @@
+.candidate-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9rem;
+  width: 100%;
+}
+
+.circular-progress {
+  color: white;
+}
+
+.candidate-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+  padding: 1.5rem;
+}
+
+.pagination {
+  color: white;
+  padding-bottom: 3rem;
+}
