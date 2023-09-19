@@ -17,7 +17,7 @@ const SignupForm = () => {
   const [validUsername, setValidUsername] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
-  const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -27,7 +27,6 @@ const SignupForm = () => {
     setValidUsername(true);
     setValidPassword(true);
     setValidEmail(true);
-    setUsernameAlreadyExists(false);
     console.log(
       "enteredUsername, enteredPassword, enteredEmail",
       enteredUsername,
@@ -36,14 +35,17 @@ const SignupForm = () => {
     );
     if (enteredUsername.trim() === "") {
       setValidUsername(false);
+      setErrorMessage("Username is required");
       return;
     }
     if (enteredPassword.trim() === "") {
       setValidPassword(false);
+      setErrorMessage("Password is required");
       return;
     }
     if (enteredEmail.trim() === "") {
       setValidEmail(false);
+      setErrorMessage("Email is required");
       return;
     }
     if (enteredUsername && enteredPassword && enteredEmail) {
@@ -54,8 +56,9 @@ const SignupForm = () => {
       );
       console.log("res", res);
       if (res && res.success === false) {
-        setUsernameAlreadyExists(true);
-        toast.error("Unsuccessful sign up");
+        setValidUsername(false);
+        setErrorMessage(res.msg);
+        toast.error(res.msg);
         return;
       }
       toast.success("Signed up successfully");
@@ -72,29 +75,20 @@ const SignupForm = () => {
       <form onSubmit={submitHandler} className={classes.form}>
         <span>
           <UsernameInput usernameRef={usernameRef} />
-          {usernameAlreadyExists && (
-            <p className={classes["invalid-input"]}>Username already exists</p>
-          )}
           {!validUsername && (
-            <p className={classes["invalid-input"]}>
-              Please enter a valid username
-            </p>
+            <p className={classes["invalid-input"]}>{errorMessage}</p>
           )}
         </span>
         <span>
           <PasswordInput passwordRef={passwordRef} />
           {!validPassword && (
-            <p className={classes["invalid-input"]}>
-              Please enter a valid password
-            </p>
+            <p className={classes["invalid-input"]}>{errorMessage}</p>
           )}
         </span>
         <span>
           <EmailInput emailRef={emailRef} />
           {!validEmail && (
-            <p className={classes["invalid-input"]}>
-              Please enter a valid email
-            </p>
+            <p className={classes["invalid-input"]}>{errorMessage}</p>
           )}
         </span>
         <button
