@@ -21,4 +21,4 @@ GET /api/candidates/:id : Retrieve details of a specific candidate by their ID.
 Database
 The project includes an SQLite database located in the ./express_server/src/db directory. The database contains two tables: user and candidate. You can use SQLite Data Browser to view the database structure and data
 
-This project contains 3 branches. you need to relate only to the "fullstack" branch, the other used for personal uses and consistency.
+This project contains 3 branches. Please relate only to the "fullstack" branch, the other used for personal uses and consistency.
