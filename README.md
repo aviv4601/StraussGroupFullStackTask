@@ -8,7 +8,7 @@ This project is a job candidates app built with React JS for the frontend (creat
 
 3. Candidates (Home Page): On this page, you can view a list of all the candidates stored in the system's database.
 
-4. Candidate Profile: Clicking on a candidate's name from the home page leads to the candidate profile, where you can see detailed information about the selected candidate.
+4. Candidate Profile: Clicking on a candidate's "Full Details" button from the home page leads to the candidate profile, where you can see detailed information about the selected candidate.
 
 API Endpoints
 The Express JS backend provides the following API endpoints to interact with the app:
