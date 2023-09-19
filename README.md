@@ -1,4 +1,4 @@
-About the project:
+### `About the project:`
 
 This project is a job candidates app built with React JS for the frontend (creating a single-page application) and Express JS for the API server. The app consists of four main screens:
 
@@ -16,7 +16,9 @@ The Express JS backend provides the following API endpoints to interact with the
 POST /api/signin: Sign in with your credentials.
 POST /api/signup: Create a new user account.
 GET /api/candidates: Retrieve a list of all candidates.
-GET /api/candidates/:id: Retrieve details of a specific candidate by their ID.
+GET /api/candidates/:id : Retrieve details of a specific candidate by their ID.
 
 Database
 The project includes an SQLite database located in the ./express_server/src/db directory. The database contains two tables: user and candidate. You can use SQLite Data Browser to view the database structure and data
+
+This project contains 3 branches. you need to relate only to the "fullstack" branch, the other used for personal uses and consistency.
