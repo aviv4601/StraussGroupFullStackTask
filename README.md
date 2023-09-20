@@ -16,7 +16,6 @@ The Express JS backend provides the following API endpoints to interact with the
 POST /api/signin: Sign in with your credentials.
 POST /api/signup: Create a new user account.
 GET /api/candidates: Retrieve a list of all candidates.
-GET /api/candidates/:id : Retrieve details of a specific candidate by their ID.
 
 Database
 The project includes an SQLite database located in the ./express_server/src/db directory. The database contains two tables: user and candidate. You can use SQLite Data Browser to view the database structure and data
